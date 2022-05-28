@@ -1,5 +1,7 @@
 # GenuineGenie Discord Bot Beta
-A bot that can do everything?
+A bot that can do everything?   
++ The purpose of this repo is to accept open source contributions for GenuineGenie Discord Bot revamping process. 
++ Once sufficient command revamp has been done, this repo will replace the original repo as the source code of bot. 
 
 # 🖥️ Code Walkthrough 
 + [index.js](index.js) is the brain of the discord bot. This file helps us connect to discord API to send and receive messages. 
