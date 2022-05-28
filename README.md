@@ -32,4 +32,4 @@ A bot that can do everything?
 
 # ✔️ Tasks to do
 + Create `loadcommand.js` for this beta bot. 
-+ Move commands from [original discord bot](https://github.com/ssncodingclub/discord-bot-GenuineGenie) to beta bot's command folder. 
++ Move commands from [original discord bot](https://github.com/ssncodingclub/discord-bot-GenuineGenie/tree/main/commands) to beta bot's command folder. 
