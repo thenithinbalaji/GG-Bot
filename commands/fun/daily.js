@@ -20,11 +20,11 @@ module.exports = class DailyCommand extends Command {
         });
     }
 
-    async run(msg) {
+    async run(message) {
         const { guild, member } = message;
         const { id } = member;
         const obj = {
-            userid: id,
+            userId: id,
         };
         await mongo().then(async (mongoose) =>{
             try{
@@ -42,7 +42,7 @@ module.exports = class DailyCommand extends Command {
                     }
                 }
                 var upd = {
-					userid : id,
+					userId : id,
 					dailyclaimtimestamp : new Date().getTime(),
 				} 
                 await userSchema.findOneAndUpdate(obj,upd, { new: true, upsert: true });

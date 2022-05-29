@@ -1,12 +1,12 @@
+require('dotenv').config()
+require('module-alias/register');
 const { token } = require('./config.json');
-const { Client, Intents } = require('discord.js');
 const { MessageEmbed } = require('discord.js');
-const { Routes } = require('discord-api-types/v9');
-const { Collection } = require('discord.js');
 const {dm_prefix} = require('./config.json');
+const Commando = require('discord.js-commando');
+const path  = require('path');
 
 const ownerId = process.env.owner_ID
-const token = process.env.token
 const client = new Commando.Client({
     owner: ownerId,
     commandPrefix: process.env.GLOBAL_PREFIX
