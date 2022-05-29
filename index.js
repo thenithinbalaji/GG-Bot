@@ -5,15 +5,25 @@ const { Routes } = require('discord-api-types/v9');
 const { Collection } = require('discord.js');
 const {dm_prefix} = require('./config.json');
 
-const client = new Client({ 
-  intents:  [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES ],
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
-});
+const ownerId = process.env.owner_ID
+const token = process.env.token
+const client = new Commando.Client({
+    owner: ownerId,
+    commandPrefix: process.env.GLOBAL_PREFIX
+})
+client.registry
+    .registerGroups([
+        ['fun', 'Fun commands'],
+        ['management', 'Server Management Commands'],
+        ['misc', 'Misc Commands'],
+        ['moderation', 'Moderation Commands']
+    ]).registerDefaults()
+    .registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
+    console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setActivity('"!help" - for help');
+    });
 
 client.on("messageCreate", msg => {
   
@@ -50,32 +60,6 @@ client.on("messageCreate", msg => {
   
       else {
         msg.author.send(`The DM prefix is -> \`${dm_prefix}\` \nTry typing \`${dm_prefix} help\` `)
-      }
-
-    }
-
-    else 
-    {
-      let { member, content, guild } = msg;
-
-      if (content === "rub daily") 
-      {
-        const daily = require('./commands/fun/daily')
-        let {
-            commands,
-            expectedArgs = '',
-            permissionError = 'You do not have permission to run this command.',
-            minArgs = 0,
-            maxArgs = null,
-            cooldown = -1,
-            repeats = 1,
-            permissions = [],
-            requiredRoles = [],
-            callback,
-          } = daily;
-
-          const arguments = content.split(/[ ]+/);
-          callback(msg, arguments, arguments.join(' '))
       }
     }
   }
