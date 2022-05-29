@@ -1,9 +1,6 @@
-const { token } = require('./config.json');
-const { Client, Intents } = require('discord.js');
-const { MessageEmbed } = require('discord.js');
-const { Routes } = require('discord-api-types/v9');
-const { Collection } = require('discord.js');
-const {dm_prefix} = require('./config.json');
+const fs = require('fs');
+const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
+const { token, dm_prefix } = require('./config.json');
 
 const client = new Client({ 
   intents:  [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES ],
@@ -14,7 +11,17 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
+// Read and remember all slash commands.
+client.commands = new Collection();
+const categoryFolders = fs.readdirSync("./commands").filter(file => file.endsWith('_commands'))
+for (const category of categoryFolders){
+  const commandFiles = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+	  const command = require(`./commands/${category}/${file}`);
+	  client.commands.set(command.data.name, command);
+} }
 
+// Handle all bot functions invoked via messages here.
 client.on("messageCreate", msg => {
   
   if(msg.author.bot)
@@ -80,5 +87,21 @@ client.on("messageCreate", msg => {
     }
   }
 })
+
+// Handle all bot functions invoked via slash commands here:
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
 
 client.login(token);
