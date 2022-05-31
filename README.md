@@ -31,7 +31,6 @@ A bot that can do everything?
   + These are then called in index.js using [require](https://github.com/ssncodingclub/discord-bot-GenuineGenie/blob/main/index.js#:~:text=const%20loadCommands%20%3D%20require).
 
 # ✔️ Tasks to do
-+ Create `loadcommand.js` for this beta bot. 
 + Move commands from [original discord bot](https://github.com/ssncodingclub/discord-bot-GenuineGenie/tree/main/commands) to beta bot's command folder. 
 + Come up with new command ideas and create issues. 
 + Work on feature issues and make PRs.
