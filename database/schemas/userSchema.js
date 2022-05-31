@@ -6,24 +6,79 @@ const reqString = {
 };
 
 const userSchema = mongoose.Schema({
-    userid : reqString,
-	hourlyclaimtimestamp : Number,
-	dailyclaimtimestamp : Number,
-	weeklyclaimtimestamp : Number,
-	lastplundertimestamp : Number,
-	coinbalance : Number,
-	vaultcoins : Number,
-	vaultsize : Number,
-	userxp : Number, 
-	userlevel : Number,
-	userhp : Number,
-	useratk : Number,
-	userdef : Number,
-	itemcount : Number,
-	commandsusedcount : Number,
-	huntedcount : Number,
-	fishedcount : Number,
-	moodleuserid : String, 
+	name: reqString,
+    userId : reqString,
+	hourlyClaimtTimestamp : {
+        type: Number,
+        default: 0,
+    },
+	dailyClaimTimestamp : {
+        type: Number,
+        default: 0,
+    },
+	weeklyClaimTimestamp : {
+        type: Number,
+        default: 0,
+    },
+	lastPlunderTimestamp : {
+        type: Number,
+        default: 0,
+    },
+	coinBalance : {
+        type: Number,
+        default: 500,
+    },
+	vaultCoins : {
+        type: Number,
+        default: 500,
+    },
+	vaultSize : {
+        type: Number,
+        default: 500,
+    },
+	items: {
+        type: String,
+        default: JSON.stringify({}),
+    },
+	userXP : {
+        type: Number,
+        default: 0,
+    },
+	userLevel : {
+        type: Number,
+        default: 0,
+    },
+	userHP : {
+        type: Number,
+        default: 0,
+    },
+	userAtk : {
+        type: Number,
+        default: 0,
+    },
+	userDef : {
+        type: Number,
+        default: 0,
+    },
+	itemCount : {
+        type: Number,
+        default: 0,
+    },
+	commandsCount : {
+        type: Number,
+        default: 0,
+    },
+	huntedCount : {
+        type: Number,
+        default: 0,
+    },
+	fishedCount : {
+        type: Number,
+        default: 0,
+    },
+	huntingBow : Boolean,
+	fishingRod: Boolean,
+	moodleUserId : String, 
 	moodleAPIkey : String
   },
   {

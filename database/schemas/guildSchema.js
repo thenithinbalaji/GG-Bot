@@ -6,7 +6,7 @@ const reqString = {
 };
 
 const guildSchema = mongoose.Schema({
-  	serverid : reqString,
+    serverid : reqString,
 	prefix : {type:String, default: "rub"},
 	welcomechannelid : String,
 	welcomechanneltext : String,
